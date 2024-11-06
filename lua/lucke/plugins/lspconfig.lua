@@ -211,6 +211,9 @@ return {
         'stylua', -- Used to format Lua code
         'clangd',
         'codelldb',
+        'ast-grep',
+        'java-debug-adapter',
+        'java-language-server',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
