@@ -39,13 +39,13 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  group = vim.api.nvim_create_augroup('lucke-highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
 })
 
--- Define a custom command called :CustomCommand
+-- Automatically runs the Oil command if a directory opens or opens a file regularly
 vim.api.nvim_create_user_command('Startup', function()
   -- Get the first argument if provided
   local arg = vim.fn.argv(0)
