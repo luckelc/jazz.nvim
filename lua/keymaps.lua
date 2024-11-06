@@ -45,4 +45,40 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Define a custom command called :CustomCommand
+vim.api.nvim_create_user_command('Startup', function()
+  -- Get the first argument if provided
+  local arg = vim.fn.argv(0)
+
+  if arg == '' then
+    -- If no argument, check if the current working directory is set as the buffer
+    if vim.fn.isdirectory(vim.fn.getcwd()) == 1 then
+      -- If we are in a directory, execute the directory-specific command
+      vim.cmd 'Oil' -- Example action for directories
+    else
+      -- Otherwise, we are in an empty buffer
+      vim.cmd "echo 'No file or directory specified, starting in an empty buffer'"
+    end
+  elseif vim.fn.isdirectory(arg) == 1 then
+    -- If the argument is a directory
+    vim.cmd 'Oil' -- Example action for directories
+  else
+    -- If the argument is a file
+  end
+end, {})
+
+vim.api.nvim_set_keymap('n', '<leader>gg', ':Copilot<CR>', { noremap = true, silent = true, desc = 'Use copilot' })
+
+vim.api.nvim_set_keymap('n', '-', ':Oil<CR>', { noremap = true, silent = true, desc = 'Open oil' })
+
+vim.api.nvim_set_keymap('n', '<leader>e', ':Neotree toggle<CR>', { noremap = true, silent = true, desc = 'Open File Manager' })
+
+-- Keybinding to open Lazy Manager
+vim.api.nvim_set_keymap('n', '<leader>l', ':Lazy<CR>', { noremap = true, silent = true, desc = 'Open Lazy:plugin manager' })
+
+-- Keybinding to open Lazy Manager
+vim.api.nvim_set_keymap('n', '<leader>cm', ':Mason<CR>', { noremap = true, silent = true, desc = 'Open Mason' })
+
+vim.api.nvim_set_keymap('n', '<leader>p', ':Telescope colorscheme<CR>', { noremap = true, silent = true, desc = 'Change theme' })
+
 -- vim: ts=2 sts=2 sw=2 et
